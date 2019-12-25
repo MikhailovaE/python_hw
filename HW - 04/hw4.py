@@ -1,5 +1,6 @@
-import os
 import re
+import os
+import docx
 
 def first_task(filename):
     with open(filename, 'r') as tex_input, open('mod1-' + filename, 'w') as tex_output:
@@ -28,8 +29,13 @@ def third_task(filename):
             if '\\begin{document}' in line:
                 tex_output.write(line)
                 beginning_found = True
-            if not beginning_found or re.search(r'\\(sub)*section', line):
+            if not beginning_found:
                 tex_output.write(line)
+            else:
+                match = re.search(r'\\(sub)*section', line)
+                if match:
+                    tex_output.write('\\quad ' * line[match.start(): match.end()].count('sub') + line)
+
         tex_output.write('\\end{document}\n')
 
 first_task('multistability.tex')
@@ -37,3 +43,9 @@ second_task('ifacconf.cls')
 third_task('multistability.tex')
 
 os.system("pandoc mod3-multistability.tex -s -o mod3-multistability.docx")
+
+mod3 = docx.Document('mod3-multistability.docx')
+for s in mod3.styles:
+    if 'Heading ' in s.name:
+        s.paragraph_format.left_indent = docx.shared.Inches(0.5 * (int(s.name.split()[-1]) - 1))
+mod3.save('mod3-multistability.docx')
