@@ -1,0 +1,138 @@
+﻿M.A. Aizerman. On a problem concerning the stability
+in the large of dynamical systems. Uspekhi Mat. Nauk
+(in Russian), 4:187–188, 1949.
+A.A. Andronov and A.G. Maier. The Mizes problem in
+the theory of direct control and the theory of point
+transformations of surfaces. Dokl. Akad. Nauk SSSR,
+43(2), 1944. (in Russian).
+A.A. Andronov, E.A. Vitt, and S.E. Khaikin. Theory of
+Oscillators. Pergamon Press, Oxford, 1966.
+N.E. Barabanov. On the Kalman problem. Sib. Math. J.,
+29(3):333–341, 1988.
+J. Bernat and J. Llibre. Counterexample to Kalman and
+Markus-Yamabe conjectures in dimension larger than 3.
+Dynamics of Continuous, Discrete and Impulsive
+Systems, 2(3):337–379, 1996.
+C. Bissell. A.A. Andronov and the development of Soviet
+control engineering. IEEE Control Systems Magazine,
+18:56–62, 1998.
+I. Boiko. Discontinuous Control Systems: Frequency-
+Domain Analysis and Design. Springer London, Limited,
+2008.
+V.O. Bragin, N.V. Kuznetsov, and G.A. Leonov. Algorithm
+for construction of counterexamples to Aizerman’s
+and Kalman’s conjecture. IFAC Proceedings Volumes
+(IFAC-PapersOnline), 4(1):24–28, 2010. doi: 10.3182/
+20100826-3-TR-4016.00008.
+V.O. Bragin, V.I. Vagaitsev, N.V. Kuznetsov, and
+G.A. Leonov. Algorithms for finding hidden oscillations
+in nonlinear systems. The Aizerman and Kalman conjectures
+and Chua’s circuits. Journal of Computer and Systems
+Sciences International, 50(4):511–543, 2011. doi:
+10.1134/S106423071104006X.
+I.M. Burkin and N.N. Khien. Analytical-numerical methods
+of finding hidden oscillations in multidimensional
+dynamical systems. Differential Equations, 50(13):1695–
+1717, 2014.
+G. Chen, N.V. Kuznetsov, G.A. Leonov, and T.N. Mokaev.
+Hidden attractors on one path: Glukhovsky-Dolzhansky,
+Lorenz, and Rabinovich systems. International Journal
+of Bifurcation and Chaos in Applied Sciences and Engineering,
+27(8), 2017. art. num. 1750115.
+R.E. Fitts. Two counterexamples to Aizerman’s conjecture.
+Trans. IEEE, AC-11(3):553–556, 1966.
+A.L. Fradkov and R.J. Evans. Control of chaos: Methods
+and applications in engineering. Annual Reviews in
+Control, 29(1):33–56, 2005.
+A.L. Fradkov and A.Yu. Pogromsky. Introduction to
+control of oscillations and chaos. World Scientific Series
+of Nonlinear Science, 1998.
+A.Kh. Gelig, G.A. Leonov, and V.A. Yakubovich. Stability
+of Nonlinear Systems with Nonunique Equilibrium (in
+Russian). Nauka, 1978. [English transl: Stability of
+Stationary Sets in Control Systems with Discontinuous
+Nonlinearities, 2004, World Scientific].
+A.A. Glutsyuk. Meetings of the Moscow mathematical
+society (1997). Russian mathematical surveys, 53(2):
+413–417, 1998.
+W.P. Heath, J. Carrasco, and M. de la Sen. Second-order
+counterexamples to the discrete-time Kalman conjecture.
+Automatica, 60:140–144, 2015.
+R.E. Kalman. Physical and mathematical mechanisms
+of instability in nonlinear automatic control systems.
+Transactions of ASME, 79(3):553–566, 1957.
+R.E. Kalman. Lyapunov functions for the problem of Lur’e
+in automatic control. Proc. Nat. Acad. Sci. USA, 49(2):
+201–205, 1963.
+N.V. Kuznetsov, O.A. Kuznetsova, G.A. Leonov, T.N.
+Mokaev, and N.V. Stankevich. Hidden attractors
+localization in Chua circuit via the describing function
+method. IFAC-PapersOnLine, 50(1):2651–2656, 2017.
+N.V. Kuznetsov, G.A. Leonov, T.N. Mokaev, A. Prasad,
+and M.D. Shrimali. Finite-time Lyapunov dimension
+and hidden attractor of the Rabinovich system.
+Nonlinear Dynamics, 92(2):267–285, 2018. doi: 10.1007/
+s11071-018-4054-z.
+M.H. L´eaut´e. M´emoire sur les oscillations à longue
+p´eriode dans les machines actionn´ ees par des moteurs
+hydrauliques et sur les moyens de pr´ evenir ces oscillations.
+Journal de l’ecole Polytechnique (in French), 55:
+1–126, 1885.
+G.A. Leonov. Concerning stability of nonlinear controlled
+systems with non-single equilibrium state. Automation
+and Remote Control, 32(10):1547–1552, 1971.
+G.A. Leonov and N.V. Kuznetsov. Algorithms for searching
+for hidden oscillations in the Aizerman and Kalman
+problems. Doklady Mathematics, 84(1):475–481, 2011.
+doi: 10.1134/S1064562411040120.
+G.A. Leonov and N.V. Kuznetsov. Hidden attractors
+in dynamical systems. From hidden oscillations in
+Hilbert-Kolmogorov, Aizerman, and Kalman problems
+to hidden chaotic attractors in Chua circuits.
+International Journal of Bifurcation and Chaos in Applied
+Sciences and Engineering, 23(1), 2013. doi: 10.1142/
+S0218127413300024. art. no. 1330002.
+G.A. Leonov and N.V. Kuznetsov. On differences and
+similarities in the analysis of Lorenz, Chen, and Lu
+systems. Applied Mathematics and Computation, 256:
+334–343, 2015. doi: 10.1016/j.amc.2014.12.132.
+G.A. Leonov and N.V. Kuznetsov. On the Keldysh problem
+of flutter suppression. AIP Conference Proceedings,
+1959(1), 2018a. doi: 10.1063/1.5034578. art. num.
+020002.
+G.A. Leonov and N.V. Kuznetsov. On flutter suppression
+in the Keldysh model. Doklady Physics, 63(9):366–370,
+2018b.
+G.A. Leonov, N.V. Kuznetsov, M.A. Kiseleva, and R.N.
+Mokaev. Global problems for differential inclusions.
+Kalman and Vyshnegradskii problems and Chua circuits.
+Differential Equations, 53(13):1671–1702, 2017.
+G. Meisters. A biography of the Markus-Yamabe
+conjecture. http://www.math.unl.edu/~gmeisters1/
+papers/HK1996.pdf, 1996.
+V.M. Popov. On absolute stability of non-linear automatic
+control systems. Automatika i Telemekhanika (in Russian),
+22(8):961–979, 1961.
+N.V. Stankevich, N.V. Kuznetsov, G.A. Leonov, and
+L. Chua. Scenario of the birth of hidden attractors in
+the Chua circuit. International Journal of Bifurcation
+and Chaos in Applied Sciences and Engineering, 27(12),
+2017. art. num. 1730038.
+Ya.Z. Tsypkin. Relay Control Systems. Univ Press,
+Cambridge, 1984.
+I.A. Vyshnegradsky. On regulators of direct action.
+Izvestiya St. Petersburg Technological Inst., 1, 1877.
+(in Russian).
+X. Wang and G. Chen. Constructing a chaotic system with
+any number of equilibria. Nonlinear Dynamics, 71(3):
+429–436, 2013.
+V.A. Yakubovich, G.A. Leonov, and A.Kh. Gelig. Stability
+of Stationary Sets in Control Systems with Discontinuous
+Nonlinearities. World Scientific, Singapure, 2004.
+X. Zhang and G. Chen. Constructing an autonomous
+system with infinitely many chaotic attractors. Chaos:
+An Interdisciplinary Journal of Nonlinear Science, 27
+(7):071101, 2017.
+N.Ye. Zhukovsky. Theory of regulation of the course of
+machines. Tipo-litgr. T-va I. N. Kushnerev and Co.,
+1909. (in Russian).

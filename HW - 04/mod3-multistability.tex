@@ -1,0 +1,36 @@
+%===============================================================================
+% $Id: ifacconf.tex 19 2011-10-27 09:32:13Z jpuente $
+% Template for IFAC meeting papers
+% Copyright (c) 2007-2008 International Federation of Automatic Control
+%===============================================================================
+\documentclass{ifacconf}
+
+\usepackage{graphicx}
+
+\makeatletter
+\def\endfigure{\end@float}
+\def\endtable{\end@float}
+\makeatother
+
+\let\ifacconfcaptionwidth\captionwidth
+\usepackage[caption=false]{subfig}
+\let\captionwidth\ifacconfcaptionwidth
+
+\usepackage{natbib}        % required for bibliography
+\bibliographystyle{unsrtnat}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{url}
+
+\theoremstyle{plain}
+\newtheorem{hypothesis}{hypothesis}
+
+%===============================================================================
+\begin{document}
+\section{Introduction}
+\section{Previous counterexamples to Kalman hypothesis}
+\section{Coexisting limit cycles}
+\section{Conclusion}
+% \section{A summary of Latin grammar}    % Each appendix must have a short title.
+% \section{Some Latin vocabulary}              % Sections and subsections are supported
+\end{document}

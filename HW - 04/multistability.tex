@@ -1,0 +1,618 @@
+%===============================================================================
+% $Id: ifacconf.tex 19 2011-10-27 09:32:13Z jpuente $
+% Template for IFAC meeting papers
+% Copyright (c) 2007-2008 International Federation of Automatic Control
+%===============================================================================
+\documentclass{ifacconf}
+
+\usepackage{graphicx}
+
+\makeatletter
+\def\endfigure{\end@float}
+\def\endtable{\end@float}
+\makeatother
+
+\let\ifacconfcaptionwidth\captionwidth
+\usepackage[caption=false]{subfig}
+\let\captionwidth\ifacconfcaptionwidth
+
+\usepackage{natbib}        % required for bibliography
+\bibliographystyle{unsrtnat}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{url}
+
+\theoremstyle{plain}
+\newtheorem{hypothesis}{hypothesis}
+
+%===============================================================================
+\begin{document}
+\begin{frontmatter}
+
+\title{Coexistence of hidden attractors and multistability in counterexamples to the Kalman hypothesis}
+% Title, preferably not more than 10 words.
+
+% \thanks[footnoteinfo]{Sponsor and financial support acknowledgment
+% goes here. Paper titles should be written in uppercase and lowercase
+% letters, not all uppercase.}
+
+\author[spbu,jyv,ipme]{N.V.~Kuznetsov},
+\author[spbu]{O.A.~Kuznetsova},
+\author[spbu]{T.N.~Mokaev},
+\author[spbu,jyv]{R.N.~Mokaev},
+\author[spbu]{M.V.~Yuldashev},
+\author[spbu]{R.V.~Yuldashev}
+
+\address[spbu]{Faculty of Mathematics and Mechanics, \\ St. Petersburg State University, Russia}
+\address[jyv]{Dept. of Mathematical Information Technology,\\
+University of Jyv\"{a}skyl\"{a}, Jyv\"{a}skyl\"{a}, Finland}
+\address[ipme]{Institute for Problems in Mechanical Engineering RAS, Russia}
+
+\begin{abstract}                % Abstract of not more than 250 words.
+The Aizerman and Kalman hypothesises played an important role in
+the theory of global stability for control systems
+and set two directions for its further development --
+the search and formulation of sufficient stability conditions,
+as well as the construction of counterexamples for these hypothesises.
+From the computational perspective the latter problem is nontrivial,
+since the oscillations in counterexamples are hidden,
+i.e. their basin of attraction does not intersect with a small neighborhood of an equilibrium.
+Numerical calculation of initial data of such oscillations for their visualization
+is a challenging problem.
+Up to now all known counterexamples to the Kalman hypothesis were constructed in such a way
+that one locally stable limit cycle (hidden oscillation) co-exists with a locally stable equilibrium.
+In this paper we demonstrate a multistable configuration of three co-existing hidden oscillations
+(limit cycles) and a locally stable equilibrium
+in the phase space of the fourth-order system, which provides
+a new class of counterexamples to the Kalman hypothesis.
+\end{abstract}
+
+\begin{keyword}
+% Five to ten keywords, preferably chosen from the IFAC keyword list.
+global stability, hidden attractors, multistability, Kalman hypothesis, periodic oscillations
+\end{keyword}
+
+\end{frontmatter}
+%===============================================================================
+
+\section{Introduction}
+
+The necessity to study stability and limit dynamical regimes (attractors)
+arises in classical theoretical and applied problems.
+One of the first such problems is related to the design of automatic control systems,
+which ensure the transition of the controlled object to the operating regime
+and its stability with respect to external disturbances.
+The first dynamical models of control systems were constructed in a way
+that the operating regime corresponded to the unique globally stable equilibrium state.
+After that models with oscillating operating regimes (periodic attractors)
+and chaotic regimes (chaotic attractors) were obtained.
+Later on, multistable models with different co-existing regimes (attractors)
+were discovered.
+Control of system states and their transfer into the basin of attraction of a desired attractor
+is the subject for study of the oscillation control theory
+(see e.g. \citep{FradkovP-1998,FradkovE-2005}).
+One of the first theoretical problems on multistability is
+the second part of the famous Hilbert's 16th problem
+on the number and mutual disposition of coexisting periodic attractors in two-dimensional
+polynomial systems.
+For chaotic multidimensional dynamical systems a similar problem on
+the number and mutual disposition of chaotic attractors and, in particular, their dependence
+on the degree of polynomials in the model
+is discussed in \citep{LeonovK-2015-AMC,KuznetsovLMPS-2018}.
+
+For nonlinear systems with a unique equilibrium and bounded solutions,
+the question arose: how to find a class of systems for which
+the condition for the absence of the possibility for birth of self-excited oscillations
+implies the absence of hidden oscillations\footnote{
+In 2009, G.A.~Leonov and N.V.~Kuznetsov
+proposed the classification of oscillations as being hidden or self-excited
+and laid the foundations of the \emph{theory of hidden oscillations}, which
+reflects the modern stage of development of the A.A. Andronov's theory of oscillations.
+Self-excited oscillations can be visualized numerically
+by a trajectory starting from a point in a neighborhood of an unstable equilibrium.
+In contrast, the basin of attraction for a hidden oscillation is not connected with equilibria
+and, thus is necessary to develop a special analytical-numerical methods
+to find initial points for their visualization.
+The current progress in the development of theory of hidden oscillations was
+recently presented at a plenary lecture at
+the 5th IFAC Conference on Analysis and Control of Chaotic Systems
+(see \url{https://chaos2018.dc.wtb.tue.nl}).
+} and the global stability of the equilibrium.
+This problem has its origins in the Watt governor stability studies.
+In 1877, I.A. Vyshnegradsky~\citep{Vyshnegradsky-1877}
+for the closed dynamic model "machine + governor"
+studied an approximate linear mathematical model without dry friction and
+proposed the stability conditions
+of the desired operating regime corresponding to the equilibrium state (trivial attractor).
+However, the question about a rigorous proof of the Vyshnegradsky problem
+on the validity of the linearization procedure for a system by discarding dry friction
+remained open.
+In 1885, M.H.~L\'{e}aut\'{e} showed~\citep{Leaute-1885} %for the first time
+the possibility of the appearance of limit periodic oscillations in
+dynamical models of control systems with dry friction.
+After that, publications appeared (see e.g.~\citep[p.~6]{Zhukovsky-1909}),
+which criticized Vyshnegradsky approach and questioned his conclusions.
+In response to this criticism, A.A.~Andronov and A.G.~Maier~\citep{AndronovM-1944}
+provided a rigorous global analysis of the nonlinear model of the Watt governor with dry friction
+and proved the sufficiency of the Vyshnegradsky conditions
+for the absence of limit oscillations and global stability of the operating regime\footnote{
+  This result was specially remarked when in 1946 A.A.~Andronov was elected to
+  the Academy of Sciences of the USSR where he
+  became the first academician in control theory.
+} (i.e. the existence of a rest segment that attracts trajectories from any initial data).
+Further development and generalization of the results by Vyshnegradsky, Andronov and Maier
+were done by G.A.~Leonov in~\citep{Leonov-1971} (see also survey \citep{LeonovKKM-2017}).
+
+In 1949, inspirited by the discussion of the work~\citep{AndronovM-1944}
+at the Andronov's scientific seminar in the Institute of Automation and Remote Control
+(USSR Academy of Sciences, Moscow)~\citep{Bissell-1998},
+M.A.~Aizerman formulated a new problem.
+His question was whether
+the sufficient conditions of global stability of
+a class of nonlinear Lurie systems with a unique equilibrium
+coincide with the necessary stability conditions
+when the smooth nonlinearity belongs to the sector of linear stability~\citep{Aizerman-1949}.
+Independently, a similar hypothesis was later advanced by R.E.~Kalman in 1957,
+with the additional requirement that the derivative of nonlinearity
+belong to the linear stability sector~\citep{Kalman-1957}:
+\emph{''If $\varphi(\sigma)$ in Fig.~1
+% [see Fig.~\ref{fig:kalman_scheme}]
+is replaced by constants
+$k$ corresponding to all possible values of $\varphi'(\sigma)$, and
+it is found that the closed-loop system is stable for
+all such $k$, then it is intuitively clear that the system
+must be monostable; i.e. all transient solutions
+will converge to a unique, stable critical point.''}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{FIG/KalmanScheme.pdf}
+  \caption{Nonlinear control system. $G(s)$ is a linear transfer
+  function, $\varphi(\sigma)$ is a single-valued smooth function~\citep{Kalman-1957}.}
+  \label{fig:kalman_scheme}
+\end{figure}
+
+Kalman's statement can be reformulated in the
+following:
+\begin{hypothesis}[The Kalman hypothesis]
+  Consider the following control system in the Lurie form
+  \begin{equation}\label{eq:main_lurie}
+    \begin{array}{l}
+    \dot{{\rm x}} = A {\rm x} + b \varphi(\sigma),\quad \sigma = c^{*}{\rm x},
+    \end{array}
+  \end{equation}
+  where $A$ is a constant $n \times n$ matrix, $b$ and $c$ are constant
+  $n$-dimensional columns, with all values being, sign $*$
+  denotes the transpose, and $\varphi$ is a smooth scalar function with $\varphi(0) = 0$,
+  satisfying the condition
+  \begin{equation}\label{cond:kalman}
+    k_1 < \varphi'(\sigma) < k_2, \quad \sigma \in (-\infty,+\infty),
+  \end{equation}
+  where $k_1$ is a number or $-\infty$, and $k_2$ is a number or $+\infty$.
+  If the linear system $\dot{{\rm x}} = A {\rm x} + k b c^* {\rm x}$, with $k \in (k_1, k_2)$
+  is asymptotically stable, then system \eqref{eq:main_lurie}
+  is stable in large (i.e. a zero solution of system~\eqref{eq:main_lurie} is asymptotically stable
+  and any solution tends to zero as $t \to +\infty$).
+\end{hypothesis}
+
+The Aizerman and Kalman hypothesises played an important role in
+the theory of global stability for control systems
+and set two directions for its further development --
+the search and formulation of sufficient stability conditions
+(see pioneering works~\citep{Popov-1961,Kal63,GeligLY-1978}),
+as well as the construction of counterexamples for these hypothesises.
+From the computational perspective, the latter problem is nontrivial,
+since the oscillations in counterexamples are hidden,
+i.e. their basin of attraction does not intersect with small neighborhood of an equilibrium.
+Numerical calculation of initial data of such oscillations for their visualization
+is a challenging problem.
+Up to now all known counterexamples to the Kalman hypothesis were constructed in such a way
+that one locally stable limit cycle (hidden oscillation) co-exists with a locally stable equilibrium.
+In this paper we demonstrate a multistable configuration of three co-existing hidden oscillations (limit cycles)
+and a locally stable equilibrium
+in the phase space of the fourth-order system, which provides a new class of counterexamples
+to the Kalman hypothesis.
+
+\section{Previous counterexamples to Kalman hypothesis}
+%Fitts
+First known attempt to construct counterexamples to the Kalman hypothesis
+was made by R.E.~Fitts~\citep{Fitts-1966},
+who experimentally studied a fourth-order system
+with a cubic nonlinearity.
+As a result, Fitts experimentally observed a periodic solution of considered system.
+% for some parameter values $K = 10$ and $\beta \in (0.01, 0.75)$.
+%Barabanov
+Later on, N.E.~Barabanov~\citep{Barabanov-1988} claimed that some Fitts' results
+are not true and suggested to use discontinuous nonlinearity $\texttt{sign}(\cdot)$
+to derive counterexamples analytically.
+% for some of the parameter values considered by Fitts, namely,
+% for $\beta \in (0.572, 0.75)$.
+%Bernat-Libre
+His work also raised critical discussions
+in~\citep{BernatL-1996,Meisters-1996,UMN-1998}.
+In particular, \cite{BernatL-1996} pointed out the necessity to rigorously analyze
+non-local bifurcations while smoothing discontinuous nonlinearities.
+They suggested
+to start the procedure for constructing counterexamples
+with a piecewise linear nonlinearity $\texttt{sat}(\cdot)$.
+%Leonov-Kuznetsov
+In \citep{BraginKL-2010-IFAC,BraginVKL-2011,LeonovK-2011-DAN},
+it was introduced an effective approach for
+construction of counterexamples to the Kalman hypothesis relying on
+an analytical-numerical search for periodic solutions by applying harmonic balance and
+numerical continuation methods and using smooth nonlinearity $\texttt{tanh}(\cdot)$.
+For discrete-time systems \cite{HeathCS-2015} demonstrated that Kalman hypothesis
+is false even for second-order systems using counterexamples
+with stable periodic solutions\footnote{
+    Remark that the difference between the dimensions of the phase spaces of a discrete-time system
+    and a continuous-time system defined by autonomous ODE,
+    for which the Kalman hypothesis is not true, is equal to 2.
+    This value coincides with the difference between the dimensions of the spaces
+    in which chaos can occur (for discrete-time systems the dimension is equal to 1,
+    for continuous-time systems~--~3).
+  % Here it is interesting to emphasize the difference between discrete-time systems
+  % and continuous-time systems defined by autonomous ODE.
+  % For the former, the Kalman hypothesis is false in two-dimensional case and
+  % chaotic behavior can occur already in one-dimensional case, while for the latter
+  % the hypothesis is false in four-dimensional case, while chaos can occur
+  % in systems with at least three-dimensional phase space.
+}.
+Also construction of counterexamples to the Kalman hypothesis
+is discussed in \citep{BurkinK-2014-HA}.
+
+\section{Coexisting limit cycles}
+
+% ���������� �� � ����� ����� (����� + �������).
+To construct numerically a new counterexample to the Kalman hypothesis
+providing three co-existing limit cycles
+% � ���� ������� ��������� ���� ������ � ������������ �� (��)
+we combined Fitts' linear system,
+Barabanov's idea of considering $\texttt{sign}(\cdot)$,
+and the idea from \citep{LeonovK-2011-DAN} to use numerical continuation procedure
+while passing from $\texttt{sign}(\cdot)$ to $\texttt{tanh}(\cdot)$.
+
+Consider the control system in the Lurie form~\eqref{eq:main_lurie}
+% \begin{equation}\label{eq:main_lurie}
+%   \begin{array}{l}
+%   \dot{{\rm x}} = A {\rm x} + b \varphi(\sigma),\quad \sigma = c^{*}{\rm x},
+%   \end{array}
+% \end{equation}
+with
+\begin{equation}\label{eq:main:matricies}
+  A\!=\!\left(
+  \begin{array}{cccc}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1  \\
+    -a_0 & -a_1 & -a_2 & -a_3
+  \end{array}
+  \right)\!\!, \
+  b = \left(
+    \begin{array}{c}
+    0 \\ 0 \\ 0 \\ 1
+    \end{array}
+  \right)\!\!, \
+  c = \left(
+    \begin{array}{c}
+    0 \\ 0 \\ -1 \\ 0
+    \end{array}
+  \right)\!\!,
+\end{equation}
+and $a_0 = (m_1^2+\beta^2)(m_2^2+\beta^2)$,
+$a_1 = 2 \beta (m_1^2 + m_2^2 + 2 \beta^2)$,
+$a_2 = m_1^2 + m_2^2 + 6 \beta^2$, $a_3 = 4 \beta$, $m_1 = 0.9, m_2 = 1.1,
+\beta = 0.03$, $\varphi(\sigma) = \texttt{tanh}(\sigma / \varepsilon)$,
+$\varepsilon = 0.01$.
+The linear part of system \eqref{eq:main_lurie} is defined by the transfer function
+\begin{equation}\label{eq:trFuncFitts}
+  W(p) = \frac{p^2}{\left((p+\beta)^2 + m_1^2\right)\left((p+\beta)^2 + m_2^2\right)}.
+\end{equation}
+
+Initial data for visualization of periodic oscillations were obtained using
+Andronov point mapping method~\citep{AndronovVKh-1966}\footnote{Other methods for searching periodic oscillations
+of dynamical models with $\texttt{sign}(\cdot)$ nonlinearity
+can be found e.g. in \citep{Tsypkin-1984,Boiko-2008}.}
+for system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+with non-linearity $\varphi(\sigma) = \texttt{sign}(\sigma)$
+and numerical continuation method\footnote{
+The idea is to consider system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+  with the nonlinearity $\varphi(\sigma) = \texttt{sign}(\sigma)
+  + \mu (\texttt{tanh}(\sigma / \varepsilon) - \texttt{sign}(\sigma))$, $\mu \in [0,1]$
+  and to switch from the system with
+  nonlinearity $\texttt{sign}(\cdot)$ to the system with a smooth nonlinearity
+  $\texttt{tanh}(\cdot)$ by varying the parameter $\mu$ from $0$ to $1$ with some small step.
+  During the switching on each next step,
+  the initial point for a trajectory to be integrated is chosen
+  as the last point of the trajectory integrated on the previous step.
+} for smoothing the discontinuous nonlinearity
+(see e.g.~\citep{LeonovK-2013-IJBC,LeonovKKM-2017}).
+Corresponding initial points for each stable limit cycle
+are presented below in Table~\ref{tb:initial_data_sign}.
+In system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+with the smooth nonlinearity $\varphi(\sigma) = \texttt{tanh}(\sigma / \varepsilon)$,
+$\varepsilon = 0.01$
+for obtained initial points the trajectories were numerically integrated,
+which after the transient process allows us to visualize
+three hidden periodic attractors (see Fig.~\ref{fig:3LC_coexists} and
+Table~\ref{tb:initial_data_tanh} with initial data).
+For each periodic attractor, an additional analysis of the local basin of attraction was carried out
+by choosing a grid of points in the vicinity of the periodic attractor and checking the attraction
+of all the trajectories with initial data from these points to the periodic attractor.
+\begin{table}[h!]
+\begin{center}
+\caption{Initial data for modeling of the three
+periodic attractors for system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+with nonlinearity $\varphi(\sigma) = \texttt{sign}(\sigma)$.}\label{tb:initial_data_sign}
+\begin{tabular}{ccc}
+& $1^{\rm st}$ and $2^{\rm nd}$ & $3^{\rm rd}$\\
+\hline\hline
+$x_1$ & $\pm0.62520516260693109$ & $-2.113517446278802$ \\
+$x_2$ & $\pm3.73240970726506105$ & $0.664336179538623$ \\
+$x_3$ & $0$ & $0.891912878629890$ \\
+$x_4$ & $\mp3.47541697286971208$ & $0.278600965570120$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+\caption{Initial data for modeling of the three
+periodic attractors for system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+with nonlinearity $\varphi(\sigma) = \texttt{tanh}(\sigma / \varepsilon)$,
+$\varepsilon = 0.01$.}\label{tb:initial_data_tanh}
+\begin{tabular}{ccc}
+& $1^{\rm st}$ and $2^{\rm nd}$ & $3^{\rm rd}$\\
+\hline\hline
+$x_1$ & $\pm 0.625216695745867$ & $-2.11395731851229$ \\
+$x_2$ & $\pm 3.73239217905780$ & $0.663680374961913$ \\
+$x_3$ & $0$ & $0.891701229667371$ \\
+$x_4$ & $\mp 3.47341560599714$ & $0.279201499188914$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Sector of linear stability}
+
+It can be seen that the eigenvalues of the Jacobi matrix at the
+zero equilibrium are
+\begin{equation*}
+  -\beta \pm m_1 i, \qquad -\beta \pm m_2 i,
+\end{equation*}
+and, thus this equilibrium is locally stable.
+
+Consider the matrix
+\begin{equation}\label{eq:lin_matrix}
+  A + kbc^{*} = \left(
+  \begin{array}{cccc}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1  \\
+    -a_0 & -a_1 & -a_2 - k & -a_3
+  \end{array}
+  \right).
+\end{equation}
+Characteristic polynomial of the matrix (\ref{eq:lin_matrix}) is
+\begin{equation}\label{eq:char_polynom}
+  \lambda^4 + a_3\lambda^3 + (a_2+k)\lambda^2 + a_1\lambda + a_0.
+\end{equation}
+
+Using Routh-Hurwitz criterion it is possible to show
+that for each $\beta > 0$ the linear system $\dot{\rm x} = A {\rm x} + k \, b \, c^* {\rm x}$,
+given by matrices \eqref{eq:main:matricies}, is globally asymptotically stable for
+$$
+  k \in \big(-4\beta^2 - \tfrac{(m_1^2 - m_2^2)^2}{2(2\beta^2 + m_1^2 + m_2^2)}, +\infty\big).
+$$
+All the roots of the characteristic polynomial~\eqref{eq:char_polynom} have negative real parts,
+iff all the leading principal minors
+\begin{equation*}
+  \begin{aligned}
+  &\Delta_1 = a_3 = 4\beta, & \Delta_2 = a_3(a_2+k) - a_1, \\
+  &\Delta_3 = a_1a_3k - a_1^2 + a_1a_2a_3-a_0a_3^2, & \Delta_4 = a_0\Delta_3
+  \end{aligned}
+\end{equation*}
+of the Hurwitz matrix
+\begin{equation*}\label{eq:lin_matrix_hurwitz}
+ \left(
+  \begin{array}{cccc}
+    a_3 & a_1 & 0 & 0 \\
+    1 & a_2+k & a_0 & 0 \\
+    0 & a_3 & a_1 & 1  \\
+    0 & 1 & a_2 + k & a_0
+  \end{array}
+  \right)
+\end{equation*}
+are positive.
+This implies the inequality $k > \frac{a_0a_3^2+a_1^2-a_1a_2a_3}{a_1a_3}$,
+which defines a sector of linear stability.
+
+% \subsection{Numerical visualization}
+% ����� ������ ��������
+\begin{figure*}
+    \subfloat[{Subspace ($x_1, x_3, x_4$)}]{
+        \label{fig:3LC_coexists:x1x3x4}
+        \includegraphics[width=0.45\linewidth]{./FIG/3LC_x143.pdf}
+      }~
+      \subfloat[{Subspace ($x_1, x_2, x_3$)}]{
+        \label{fig:3LC_coexists:x1x2x3}
+        \includegraphics[width=0.45\linewidth]{./FIG/3LC_x123.pdf}
+      }
+
+      \subfloat[{Subspace ($x_1, x_2, x_4$)}]{
+        \label{fig:3LC_coexists:x1x2x4}
+        \includegraphics[width=0.45\linewidth]{./FIG/3LC_x124.pdf}
+      }~
+      \subfloat[{Subspace ($x_2, x_3, x_4$)}]{
+        \label{fig:3LC_coexists:x2x3x4}
+        \includegraphics[width=0.45\linewidth]{./FIG/3LC_x234.pdf}
+      }~
+
+      \caption{Co-existence of a stable equilibrium (light green) and
+      three hidden limit cycles,
+      two large symmetric ones (red and purple), and a small one (dark green),
+      in the phase space of system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+      with $\varphi(\sigma) = \texttt{tanh}(\sigma / \varepsilon)$,
+      $\varepsilon = 0.01$.
+      }
+      \label{fig:3LC_coexists}
+\end{figure*}
+
+\subsection{Describing function method and Popov criterion}
+Let us show that the application of the classical describing function method\footnote{
+  Describing function method belongs
+  to the approximate methods of analysis of control systems
+  and there exist various examples of systems for which it
+  leads to incorrect results
+  in both prediction of stability (see e.g.~\citep{BraginVKL-2011,LeonovK-2013-IJBC})
+  and prediction of the existence of oscillations
+  (see e.g.~\citep{LeonovK-2018-AIP,LeonovK-2018-DAN}).
+} and Popov method
+to system \eqref{eq:main_lurie}, \eqref{eq:main:matricies} demonstrates the necessity
+of their further development to be able to obtain
+the necessary and sufficient conditions for the
+birth of oscillations and stability.
+
+Suppose system~\eqref{eq:main_lurie}, \eqref{eq:main:matricies} has periodic solution
+with amplitude $a$ and frequency $\omega_0$.
+% $a \cos(\omega_0t)$.
+Hence, according to the harmonic balance method, frequency of this solution can be found
+from the following equality $\operatorname{Im} W(i\omega_0) = 0$
+and, therefore, $\omega_0 = \sqrt{\beta^2+\frac{m_1^2+m_2^2}{2}} > 0$.
+Also, from the equality $\operatorname{Re} W(i\omega_0) = 0$
+% we get $k = -(\operatorname{Re} W(i\omega_0))^{-1} = - \left(4 \beta^2 + \frac{(m_1^2 - m_2^2)^2}{2 (2\beta^2 + m_1^2 + m_2^2)}\right) < 0$.
+we can get a coefficient of harmonic linearization
+\begin{equation*}
+	k_{\rm hl} = -\frac{1}{\operatorname{Re} W(i\omega_0)} = - \left(4 \beta^2 + \frac{(m_1^2 - m_2^2)^2}{2 (2\beta^2 + m_1^2 + m_2^2)}\right) < 0.
+\end{equation*}
+The describing function is defined as follows:
+\begin{equation}
+		\begin{array}{ll}
+			\Phi(a) =&  \int\limits_{0}^{\frac{2\pi}{\omega_0}} {\rm tanh} (\cos(\omega_0t)a)\cos(\omega_0t)dt - \\
+			& - ak_{\rm hl}\int\limits_{0}^{\frac{2\pi}{\omega_0}}(\cos(\omega_0t))^2dt \geq -\frac{\pi ak_{\rm hl}}{\omega_0}.
+		\end{array}
+\end{equation}
+
+If $a \neq 0$, then $\Phi(a) > 0$ and there is no such $a$ that $\Phi(a) = 0$.
+Therefore, there are no periodic solutions in the system~(\ref{eq:main_lurie})
+according to the describing function method.
+
+Consider the Popov criterion on the absolute stability
+(see e.g. \citep[p.~961]{Popov-1961},\cite[p.~79]{YakubovichLG-2004})
+for system \eqref{eq:main_lurie}, \eqref{eq:main:matricies}
+and non-linearity $\varphi(\sigma) = \texttt{tanh}(\sigma)$.
+First two conditions of the Popov criterion, i.e. asymptotic stability of the linear part and
+$0 \leq \frac{\tanh(\sigma)}{\sigma} \leq \infty, \sigma \neq 0, \tanh(0) = 0$, are satisfied.
+The third condition of the Popov criterion has the following form:
+\begin{equation*}\label{eq:popov}
+	\begin{aligned}
+		&\operatorname{Re}[(1+i\omega\vartheta)W(i\omega)] = \operatorname{Re}W(i\omega) - \omega\vartheta\operatorname{Im}W(i\omega) \geq 0 \Leftrightarrow \\
+		&-\omega^2(\omega^4-\omega^2a_2+a_0) \geq 2\vartheta\omega^4\beta\left(-2\omega^2+\frac{a_1}{2\beta}\right).
+	\end{aligned}
+\end{equation*}
+
+If $\omega = 0$, then this inequality holds.
+Else, if $\omega \neq 0$, then this condition takes the form:
+\begin{equation}\label{eq:popov:cond3}
+		(4\vartheta\beta-1)\omega^4 - (\vartheta a_1 - a_2)\omega^2-a_0 \geq 0.
+\end{equation}
+Note that since $a_0 >0$, then for each $\vartheta \geq 0$ there exists small
+enough $\omega > 0$ such that \eqref{eq:popov:cond3} is not true.
+Therefore, the conditions of the criterion are not satisfied.
+
+\section{Conclusion}
+
+Thus, the results obtained here show the limits of applicability of existing analytical methods
+and demonstrate the difficulty of identifying classes of systems for which
+it is possible to match the necessary and sufficient conditions for global stability.
+
+In the general case, when considering various nonlinearities, it is possible to synthesize
+systems with a large number of coexisting attractors (equilibria, limit cycles, chaotic attractors),
+see e.g.~\citep{WangC-2013,ZhangC-2017,StankevichKLC-2017,KuznetsovKLMS-2017-IFAC,ChenKLM-2017-IJBC}.
+However, in these examples
+the nonlinearities were non-scalar, or
+the derivatives of the nonlinearities changed their signs.
+Therefore, these nonlinearities did not satisfy the conditions of Kalman hypothesis.
+In this article, we demonstrate new counterexample to the Kalman hypothesis with
+three co-existing stable limit cycles.
+The mutual disposition
+of co-existing attractors in counterexamples to the Kalman hypothesis
+(depending on the dimension of the system)
+and possibility of managing the number of attractors
+(e.g. finding the maximum possible number of attractors)
+are open problems for the further study.
+
+\begin{ack}
+We acknowledge support form
+the Russian Scientific Foundation (project 19-41-02002, sections 2-4) and
+the Leading Scientific Schools of Russia (project NSh-2858.2018.1, section 1).
+\end{ack}
+
+%\bibliography{../../../bib/bib_nk,../../../bib/bib_full,../../../bib/bib_leonov,../../../bib/bib-2008-str-at,../../../bib/bib-kl-all,../../../bib/bib-discont,../../../bib/bib-hidden,../../../bib/bib-gly,../../../bib/bib_pll,../../../bib/bib_homoclin,../../../bib/bib_KiselevaKL-2017-DE}
+
+            % bib file to produce the bibliography with bibtex (preferred)
+ \bibliography{multistability}
+
+ \begin{thebibliography}{xx}  % you can also add the bibliography by hand
+
+ \bibitem[Lurie(1944)]{Lur:44}
+ A.I. Lurie, V.N. Postnikov
+ \newblock To the stability theory of controlled system.
+ \newblock \emph{Applied Mathematics and Mechanics (in Russian)}, 8:3, 246--248, 1944.
+
+ \bibitem[LeonovKuznetsov(2011)]{LeonovKuznetsov:2011}
+ N.V. Kuznetsov, G.A. Leonov
+ \newblock Algorithms for searching for hidden oscillations in the Aizerman and Kalman problems.
+ \newblock \emph{Doklady Mathematics}, 84:1, 475--481, 2011.
+
+ \bibitem[Chen(2013)]{Chen:13}
+ G. Chen, X. Wang
+ \newblock Constructing a chaotic system with any number of equilibria.
+ \newblock \emph{Nonlinear Dynamics}, 71:3, 429-436, 2011.
+
+ \bibitem[KuznetsovLeonov(2013)]{KL:15}
+ N.V. Kuznetsov, G.A. Leonov
+ \newblock On differences and similarities in the analysis of Lorenz, Chen, and Lu systems.
+ \newblock \emph{Applied Mathematics and Computation}, 256, 334--343, 2015.
+
+ \bibitem[KuznetsovLeonovMokaev(2018)]{KLMPS:18}
+ N.V. Kuznetsov, G.A. Leonov, T.N. Mokaev, A. Prasad, M.D. Shrimali
+ \newblock Finite-time Lyapunov dimension and hidden attractor of the Rabinovich system.
+ \newblock \emph{Nonlinear Dynamics}, 92:2, 267-285, 2018.
+
+ \bibitem[Popov(1961)]{Popov:61}
+ V.M. Popov
+ \newblock On absolute stability of non-linear automatic control systems.
+ \newblock \emph{Avtomat. i Telemekh.}, 22:8, 961--979, 1961.
+
+ \bibitem[Popov(1970)]{Popov:70}
+ V.M. Popov
+ \newblock Hyper-stability of Automatic Systems.
+ \newblock \emph{M.: Nauka}, 1970.
+
+ \bibitem[LeonovKuznetsovBragin(2011)]{BVKL:2011}
+ V.O. Bragin, V.I. Vagaitsev, N.V. Kuznetsov, G.A. Leonov
+ \newblock Algorithms for finding hidden oscillations in nonlinear systems. The Aizerman and Kalman hypothesises and Chua's circuits.
+ \newblock \emph{Journal of Computer and Systems Sciences International}, 50:4, 511--543, 2011.
+
+ \bibitem[KuznetsovLeonov(2013)]{LeonovK-2013-IJBC}
+ N.V. Kuznetsov, G.A. Leonov
+ \newblock Hidden attractors in dynamical systems. From hidden oscillations in Hilbert-Kolmogorov, Aizerman, and Kalman problems to hidden chaotic attractor in Chua circuits.
+ \newblock \emph{International Journal of Bifurcation and Chaos in Applied Sciences and Engineering}, 23, 2013.
+
+ \bibitem[Heath.et.al(2013)]{Heath:2015}
+ W.P. Heath, J. Carrasco, M. de la Sen
+ \newblock Second-order counterexamples to the discrete-time Kalman hypothesis.
+ \newblock \emph{Automatica}, 2015.
+
+ \bibitem[Leonov.et.al(2017)]{LKKM:2017}
+ Leonov G.A., Kuznetsov N.V., Kiseleva M.A., Mokaev R.N
+ \newblock Global Problems for Differential Inclusions. Kalman and Vyshnegradskii Problems and Chua Circuit.
+ \newblock \emph{Differential Equations}, 53:13, 2017.
+
+ \end{thebibliography}
+
+% \appendix
+% \section{A summary of Latin grammar}    % Each appendix must have a short title.
+% \section{Some Latin vocabulary}              % Sections and subsections are supported
+                                                                         % in the appendices.
+\end{document}
