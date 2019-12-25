@@ -28,12 +28,12 @@ def third_task(filename):
             if '\\begin{document}' in line:
                 tex_output.write(line)
                 beginning_found = True
-            if '\\section' in line or '\\subsection' in line or not beginning_found:
+            if not beginning_found or re.search(r'\\(sub)*section', line):
                 tex_output.write(line)
         tex_output.write('\\end{document}\n')
-os.system("pandoc mod3-multistability.tex -s -o mod3-multistability.docx")
-
 
 first_task('multistability.tex')
 second_task('ifacconf.cls')
 third_task('multistability.tex')
+
+os.system("pandoc mod3-multistability.tex -s -o mod3-multistability.docx")
