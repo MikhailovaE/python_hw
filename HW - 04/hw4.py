@@ -28,7 +28,7 @@ def third_task(filename):
             if '\\begin{document}' in line:
                 tex_output.write(line)
                 beginning_found = True
-            if '\\section' in line or not beginning_found:
+            if '\\section' in line or '\\subsection' in line or not beginning_found:
                 tex_output.write(line)
         tex_output.write('\\end{document}\n')
 os.system("pandoc mod3-multistability.tex -s -o mod3-multistability.docx")
